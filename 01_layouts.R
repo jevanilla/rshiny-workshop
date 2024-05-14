@@ -32,7 +32,7 @@ ui3 <- fluidPage(
                mainPanel("main panel")
              )),
     tabPanel("Layout 2",
-             titlePanel("Fluid Row Columns"),
+             titlePanel("Fluid Rows with Columns"),
              fluidRow(
                column(width = 3, "top column 1"),
                column(width = 6, "top column 2", offset=2)
@@ -45,5 +45,9 @@ ui3 <- fluidPage(
 
 server <- function(input,output) {}
 
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui3, server = server)
+
+# Excercises:
+# 1. Add a column to the fluidRow layout
+
 

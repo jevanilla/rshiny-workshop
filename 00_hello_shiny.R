@@ -1,5 +1,5 @@
 
-# always need to load shiny and any other dependcies
+# always need to load shiny and any other dependencies
 
 library(shiny)
 
@@ -15,3 +15,6 @@ server <- function(input,output) {}
 # pulls it all together
 shinyApp(ui = ui, server = server)
 
+# Excercises
+# 1. Run the application
+# 2. Modify the text that's displayed
