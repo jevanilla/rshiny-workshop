@@ -31,7 +31,7 @@ shinyApp(ui = ui, server = server)
 
 
 
-# Excercises
+# Exercises
 
 # 1. Add another input using one of the following: textInput(), checkboxInput() or radioButtons()
 # 2. Format your output by building up a statement with paste()

@@ -17,3 +17,5 @@ Atlantic Community Engaged Data Science course
 - [ggplot2](https://CRAN.R-project.org/package=ggplot2)
 
 - [plotly](https://CRAN.R-project.org/package=plotly)
+
+- [leaflet](https://CRAN.R-project.org/package=leaflet)
