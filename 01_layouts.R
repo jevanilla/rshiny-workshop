@@ -1,6 +1,10 @@
+# Lesson 1 - Layouts
+# Objectives
+# 1. Learn how to define the layout of your app in the user interface
 
-
-library(shiny)
+suppressPackageStartupMessages({
+  library(shiny)
+})
 
 ui <- fluidPage(
   titlePanel("Hello shiny!"),
@@ -47,7 +51,7 @@ server <- function(input,output) {}
 
 shinyApp(ui = ui3, server = server)
 
-# Excercises:
+# Exercises:
 # 1. Add a column to the fluidRow layout
 
 

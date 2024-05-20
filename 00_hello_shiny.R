@@ -1,12 +1,13 @@
+# Lesson 0 - Hello Shiny
+# Objectives
+# 1. Launch your first shiny app with just the basics
+
 
 # always need to load shiny and any other dependencies
-
 library(shiny)
 
 # will contain the layout of your app
-ui <- fluidPage(
-  "Hello shiny!"
-)
+ui <- fluidPage()
 
 # will contain any actions to carry out inside your app
 # will run nonstop in the background

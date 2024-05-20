@@ -1,14 +1,18 @@
+# Lesson 3 - Outputs
 # Objectives:
-# 1. Learn how to add plot and image outputs to your Shiny app
+# 1. Learn how to add many types of outputs to your Shiny app
 
-library(shiny)
-library(dplyr)
+suppressPackageStartupMessages({
+  library(shiny)
+  library(dplyr)
+  library(ggplot2)
+  library(plotly)
+  
+  library(DT) # for rendering data tables and outputting them
+})
 
-library(ggplot2)
-library(plotly)
 
 # Adding a global variable that anything in the app can see
-
 s <- storms 
 
 ss <- s |>
@@ -18,17 +22,19 @@ ss <- s |>
             lat = mean(lat))
 
 ui <- fluidPage(
-  titlePanel("Outputs"),
+  titlePanel("3 - Outputs"),
   sidebarLayout(
-    sidebarPanel(
-      imageOutput("image")
-    ),
+    sidebarPanel(),
     mainPanel(
+      textOutput("text"),
+      verbatimTextOutput("print"),
+      verbatimTextOutput("summary"),
+      tableOutput("table"),
+      DTOutput("dtable"),
       plotOutput("plot1"),
       plotOutput("plot2"),
       plotlyOutput("plot3"),
-      tableOutput("table"),
-      dataTableOutput("dtable")
+      imageOutput("image")
     )
   )
 )
@@ -36,9 +42,17 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  output$plot1 <- renderPlot({
-    plot(s$lat, s$wind)
-  })
+  output$text <- renderText("Text")
+  
+  output$print <- renderPrint("Text 2")
+  
+  output$summary <- renderPrint(summary(s))
+  
+  output$table <- renderTable(head(s))
+  
+  output$dtable <- DT::renderDT(s)
+  
+  output$plot1 <- renderPlot(plot(s$lat, s$wind))
   
   output$plot2 <- renderPlot({
     ggplot(s, aes(x=lat, y=wind, alpha=0.3)) +
@@ -51,15 +65,11 @@ server <- function(input, output) {
             y=~wind, 
             type="scatter",
             mode="markers",
-            text=~paste("Name:", name, "<br>", "Year:", year, "<br>", "Month:", month, "<br>", "Hour:", hour, "<br>", "Status:", status)) 
-  })
-  
-  output$table <- renderTable({
-    head(s)
-  })
-  
-  output$dtable <- renderDataTable({
-    s
+            text=~paste("Name:", name, "<br>", 
+                        "Year:", year, "<br>", 
+                        "Month:", month, "<br>", 
+                        "Hour:", hour, "<br>", 
+                        "Status:", status)) 
   })
   
   output$image <- renderImage({
@@ -74,6 +84,6 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 
 
-# Excercises
-# 1. Add another plot
-# Move the COA logo image to the top of the main panel
+# Exercises
+# 1. Adjust the height and width of the base R plot
+# 2. Move the COA logo image to the top of the main panel

@@ -21,3 +21,7 @@ Materials that accompany an RShiny workshop for the College of the Atlantic Comm
 
 - [leaflet](https://CRAN.R-project.org/package=leaflet)
 
+## Example Data
+
+We will use the [storms](https://dplyr.tidyverse.org/reference/storms.html) dataset in this workshop.
+
