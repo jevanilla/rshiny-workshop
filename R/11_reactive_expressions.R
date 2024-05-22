@@ -11,13 +11,12 @@ suppressPackageStartupMessages({
 })
 
 s <- storms |>
-  mutate(date = as.POSIXct(sprintf("%s-%s-%s %s:00", year, month, day, hour)),
-         name_year = paste(name, year, sep=", ")) 
+  mutate(date = as.POSIXct(sprintf("%s-%s-%s %s:00", year, month, day, hour))) 
 
 ui <- fluidPage(
   selectInput("storm_choice",
               "Choose a storm to plot",
-              choices=sort(unique(s$name_year)),
+              choices=sort(unique(s$name)),
               selected="Hugo"),
   plotOutput("wind_plot"),
   leafletOutput("storm_track")
@@ -26,7 +25,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   stormdata <- s |>
-    filter(name_year == input$storm_choice) |>
+    filter(name == input$storm_choice) |>
     arrange(date)
   
   output$wind_plot <- renderPlot({
@@ -35,7 +34,7 @@ server <- function(input, output, session) {
   })
   
   output$storm_track <- renderLeaflet({
-    leaflet(data=stormdata |>
+    leaflet(data=stormdata) |>
       addTiles() |>
       addCircleMarkers(~long, ~lat)
   })
