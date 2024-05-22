@@ -22,17 +22,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
- plotdata <- reactive({
-   if (input$log_x) {
-     s |>
-       mutate(!!input$x_var := log10(.data[[input$x_var]]))
-   } else {
-     s
-   }
- })
-  
   output$scatter <- renderPlot({
-    ggplot(plotdata(), aes(x = input$x_var, y = input$y_var)) +
+    ggplot(s, aes(x = input$x_var, y = input$y_var)) +
       geom_point()
   })
 }

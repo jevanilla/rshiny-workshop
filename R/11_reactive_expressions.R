@@ -30,12 +30,12 @@ server <- function(input, output, session) {
     arrange(date)
   
   output$wind_plot <- renderPlot({
-    ggplot(stormdata(), aes(x=date)) + 
+    ggplot(stormdata, aes(x=date)) + 
       geom_line(aes(y=wind)) 
   })
   
   output$storm_track <- renderLeaflet({
-    leaflet(data=stormdata()) |>
+    leaflet(data=stormdata |>
       addTiles() |>
       addCircleMarkers(~long, ~lat)
   })
