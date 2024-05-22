@@ -1,7 +1,8 @@
-# Using Tidy Evaluation with Shiny
+# Lesson 1.3 - Using Tidy Evaluation with Shiny
 # Objectives
-# 1. operating on data frames using the dplyr verbs
-# 2. making dynamic graphics using ggplot2
+# 1. making dynamic graphics using ggplot2
+# 2. operating on data frames using the dplyr verbs
+
 
 suppressPackageStartupMessages({
   library(shiny)
@@ -10,24 +11,28 @@ suppressPackageStartupMessages({
 })
 
 s <- storms
-ch <- c("year", "month", "lat", "lon", "wind", "pressure")
+choices <- c("year", "month", "lat", "wind", "pressure")
 
 ui <- fluidPage(
-  titlePanel("Tidy"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("x_var", "X Variable", choices=ch, selected="wind"),
-      selectInput("y_var", "Y Variable", choices=ch, selected="lat")
-    ),
-    mainPanel(
-      plotOutput("scatter")
-    )
-  )
+  selectInput("x_var", "X Variable", choices=choices, selected="wind"),
+  selectInput("y_var", "Y Variable", choices=choices, selected="lat"),
+  checkboxInput("log_x", "Log Transform X Axis"),
+  plotOutput("scatter")
 )
 
 server <- function(input, output, session) {
+  
+ plotdata <- reactive({
+   if (input$log_x) {
+     s |>
+       mutate(!!input$x_var := log10(.data[[input$x_var]]))
+   } else {
+     s
+   }
+ })
+  
   output$scatter <- renderPlot({
-    ggplot(s, aes(x=.data$input$x_var]], y=.data[[input$y_var]])) +
+    ggplot(plotdata(), aes(x = input$x_var, y = input$y_var)) +
       geom_point()
   })
 }

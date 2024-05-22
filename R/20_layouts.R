@@ -1,4 +1,4 @@
-# Lesson 1 - Layouts
+# Lesson 2.0 - Layouts
 # Objectives
 # 1. Learn how to define the layout of your app in the user interface
 
@@ -49,7 +49,7 @@ ui3 <- fluidPage(
 
 server <- function(input,output) {}
 
-shinyApp(ui = ui3, server = server)
+shinyApp(ui = ui2, server = server)
 
 # Exercises:
 # 1. Add a column to the fluidRow layout
