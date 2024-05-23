@@ -11,7 +11,7 @@ ui <- fluidPage()
 
 # will contain any actions to carry out inside your app
 # will run nonstop in the background
-server <- function(input,output) {}
+server <- function(input, output) {}
 
 # pulls it all together
 shinyApp(ui = ui, server = server)

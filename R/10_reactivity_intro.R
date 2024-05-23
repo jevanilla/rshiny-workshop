@@ -16,11 +16,17 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  output$n_storms <- renderText({
-    y <- s |>
+  storms <- reactive({
+    s |>
       filter(year == input$year)
-    
-    paste("In", input$year, "there were", length(unique(y$name)), "storms", sep=" ")
+  })
+  
+  output$n_storms <- renderText({
+    paste("In", input$year, "there were", length(unique(storms()$name)), "storms", sep=" ")
+  })
+  
+  output$max_wind <- renderText({
+    paste("The maximum wind speed was", max(storms()$wind), sep=" ")
   })
   
 }

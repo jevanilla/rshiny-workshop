@@ -10,22 +10,27 @@
 
 
 library(shiny)
+library(dplyr)
 
 s <- storms
 
 ui <- fluidPage(
   # Select variable for x-axis
+  selectInput("x_var", "X Variable", choices=c("Year" = "year", "Month" = "month", "Latitude" = "lat", "Wind" = "wind", "Pressure" = "pressure"), selected="wind"),
 
   # Select variable for y-axis
-
-  # Show the user the plot
+  selectInput("y_var", "Y Variable", choices=c("Year" = "year", "Month" = "month", "Latitude" = "lat", "Wind" = "wind", "Pressure" = "pressure"), selected="lat"),
   
+  # Show the user the plot
+  plotOutput("plot")
 )
 
 server <- function(input, output) {
   
   # Define the plot in the server
-  
+  output$plot <- renderPlot({
+    plot(x=s[[input$x_var]], y=s[[input$y_var]])
+  })
 }
 
 shinyApp(ui, server)

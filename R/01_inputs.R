@@ -8,16 +8,16 @@ ui <- fluidPage(
   selectInput(inputId = "choice",
               label = "Choose a number",
               choices = c(1,2,3)),
-  textInput("text", "Text Input"),
+  textInput("text", "Text Input", placeholder="write something here"),
   passwordInput("password", "Password Input"),
   textAreaInput("textarea", "Text Area:"),
-  numericInput("numeric", "Numeric Input", value=10),
-  sliderInput("slider", "Slider Input", value=1, min=0, max=5),
+  numericInput("numeric", "Numeric Input", value=10, step=10),
+  sliderInput("slider", "Slider Input", value=c(2,3), min=0, max=5),
   dateInput("date", "Choose a date"),
   dateRangeInput("date_range", "Choose a date range"),
   checkboxInput("checkbox", "Check me", value=TRUE),
   fileInput("file_upload", "Upload a file"),
-  actionButton("action", "Action Button", class = "btn-danger")
+  actionButton("action", "Action Button")
 )
 
 server <- function(input, output) {}

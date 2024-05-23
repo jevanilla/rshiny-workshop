@@ -7,7 +7,7 @@ library(shiny)
 library(bslib)
 
 ui <- fluidPage(
-  theme = bs_theme(bootswatch = "flatly"),
+  theme = bs_theme(bootswatch = "quartz"),
   titlePanel("Navbar Page"),
   a(href="https://bootswatch.com/", "Check out the themes here"),
   tabsetPanel(

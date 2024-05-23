@@ -22,10 +22,23 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
+  plotdata <- reactive({
+    if (input$log_x) {
+      s |>
+        mutate(!!input$x_var := log10(.data[[input$x_var]]))
+    } else {
+      s
+    }
+  })
+  
   output$scatter <- renderPlot({
-    ggplot(s, aes(x = input$x_var, y = input$y_var)) +
-      geom_point()
+    ggplot(plotdata(), aes(x = .data[[input$x_var]], y = .data[[input$y_var]])) +
+      geom_point() 
   })
 }
 
 shinyApp(ui, server)
+
+#Exercises
+# Make the 
+# Add an option to log transform the x axis

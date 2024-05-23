@@ -18,6 +18,9 @@ ui <- fluidPage(
               choices=sort(unique(s$year))),
   selectInput("name",
               "Choose a storm",
+              NULL),
+  selectInput("status",
+              "Select a status",
               NULL)
   
 )
@@ -38,9 +41,18 @@ server <- function(input, output, session) {
     filter(storms(), name == input$name)
   })
   
+  observeEvent(storm(), {
+    choices <- unique(storm()$status)
+    updateSelectInput(session=session, "status", choices=choices)
+  })
+  
+  storm_status <- reactive({
+    filter(storm(), status == input$status)
+  })
+  
 
   output$storm_tracks <- renderLeaflet({
-    leaflet(data=storm()) |> 
+    leaflet(data=storm_status()) |> 
       addTiles() |>
       addCircleMarkers(~long, ~lat, popup=~htmltools::htmlEscape(status))
   })

@@ -14,19 +14,21 @@ suppressPackageStartupMessages({
 s <- storms 
 
 ui <- fluidPage(
+  imageOutput("image"),
   textOutput("text"), 
   verbatimTextOutput("print"), 
   verbatimTextOutput("summary"), 
   tableOutput("table"),
   DTOutput("dtable"),
   plotOutput("plot1"),
-  plotOutput("plot2"),
-  imageOutput("image")
+  plotOutput("plot2")
 )
 
 server <- function(input, output) {
   
-  output$text <- renderText("Text") # similar to cat()
+  output$text <- renderText({
+    "Text"
+  }) # similar to cat()
   
   output$print <- renderPrint("Text 2") # similar to print()
   
@@ -36,7 +38,7 @@ server <- function(input, output) {
   
   output$dtable <- DT::renderDT(s) # for dynamic tables
   
-  output$plot1 <- renderPlot(plot(s$lat, s$wind))
+  output$plot1 <- renderPlot(plot(s$lat, s$wind), width=400, height=400)
   
   output$plot2 <- renderPlot({
     ggplot(s, aes(x=lat, y=wind, alpha=0.3)) +
