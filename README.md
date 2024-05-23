@@ -77,6 +77,34 @@ this workshop.
 
 - 2.3 Data IO
 
+### 3 - Sharing your Shiny App
+
+- With other R users
+
+  1.  Share the code (github, zip file, etc.) for others to run locally
+  2.  Maintain the code in a public github repository and call:
+
+  <!-- -->
+
+      shiny::runGitHub(repo, username)
+
+  3.  Or to keep things anonymous:
+
+  <!-- -->
+
+      shiny::runGist()
+
+- Publish as a web page
+
+  1.  [Shinyapps.io](https://www.shinyapps.io/) First 5 apps are free
+
+  2.  [Private
+      server](https://github.com/rstudio/shiny-server/blob/master/README.md)
+      If you have your own Linux server
+
+  3.  [Posit connect](https://posit.co/products/enterprise/connect/)
+      Enterprise solution with all the bells and whistles
+
 ## Acknowledgements
 
 Materials in this workshop were adapted from:
